@@ -1,24 +1,30 @@
 import time
 
+#from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+# selenium.webdriver.support import wait
 
-link = "http://suninjuly.github.io/find_xpath_form."
+link = "https://test.dmed.kz/"
 
 try:
     browser = webdriver.Chrome()
     browser.get(link)
 
-    input1 = browser.find_element(By.TAG_NAME, "input")
-    input1.send_keys("baur")
-    input2 = browser.find_element(By.NAME, "last_name")
-    input2.send_keys("nineelven")
-    input3 = browser.find_element(By.CLASS_NAME, "form-control.city")
-    input3.send_keys("astana")
-    input4 = browser.find_element(By.ID, "country")
-    input4.send_keys("kazakhstan")
-    input5 = browser.find_element(By.CSS_SELECTOR,"button.btn")
-    input5.click()
+    username = browser.find_element(By.XPATH, ".//*[@name='tbUserName']")
+    input_username = username.send_keys("Bake_test")
+    password = browser.find_element(By.XPATH, ".//*[@name='tbPassword']")
+    input_password = password.send_keys("Zz123456!")
+    button = browser.find_element(By.XPATH, ".//*[@id='btn-sign-in']").click()
+
+    #browser.switch_to.window(second_window)
+    time.sleep(1)
+    # self.wait.until(EC.visibility_of_all_elements_located)
+    webdriverwait = browser.find_element(By.XPATH, "//*[@class='open-overlay' and text()='Модули']").click()
+    profylaxis = browser.find_element(By.XPATH, ".//*[@href='https://prof-test.dmed.kz/']").click()
+    first_window = browser.window_handles[0]
+    second_window = browser.window_handles[1]
+    browser.switch_to.window(second_window)
 
 finally:
     time.sleep(10)
